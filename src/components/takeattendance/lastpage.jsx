@@ -12,7 +12,7 @@ export const Lastpage = () => {
          <hr className='mt-2'></hr>
 
          <div className='flex flex-col justify-center items-center mt-3'>
-          <p>Your attendance is successful</p>
+          <p className='mb-2'>Your attendance is successful</p>
           <p>Click <Link to={"/home"}><b><i> here </i></b>to go to home</Link></p>
          </div>
         </div>

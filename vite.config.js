@@ -3,6 +3,6 @@ import react from '@vitejs/plugin-react'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base:'/attendance_student/',
+  // base:'/attendance_student/',
   plugins: [react()],
 })
