@@ -18,7 +18,7 @@ export const Navbar = () => {
     </div>
         </div>
         <div className='text-white'>
-            <p>User Name</p>
+            {/* <p>User Name</p> */}
         </div>
     </div>
   )

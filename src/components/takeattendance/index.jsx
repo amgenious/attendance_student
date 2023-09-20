@@ -1,8 +1,40 @@
-import React, { useRef } from 'react'
+import React, { useRef, useState, useEffect } from 'react'
 import { Navbar } from '../shared/Navbar'
-import { Link } from 'react-router-dom';
+import { Link,  useNavigate } from 'react-router-dom';
+import axios from 'axios'
 
 export const Takeattendanceindex = () => {
+  const history = useNavigate()
+  const [indexnumber, setIndexNumber] = useState('')
+  const [uniquenumber, setUniqueNumber] = useState('')
+
+
+  async function submit(e) {
+  e.preventDefault();
+
+  try {
+    const response = await axios.post("https://attendance-backend-gsu3.onrender.com/studentattendance", {
+      indexnumber, uniquenumber
+    }, {
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      }
+    });
+
+    if (response.data === "created") {
+      history('/lastpage');
+    } else if (response.data === "notcreated") {
+      alert('Class not created');
+    }
+  } catch (error) {
+    console.error('Error creating class:', error);
+  }
+}
+
+
+
+
     const videoRef = useRef(null);
   const canvasRef = useRef(null);
 
@@ -46,11 +78,13 @@ export const Takeattendanceindex = () => {
          <div className='flex flex-col justify-center items-center mt-3'>
             <div className='w-[350px]'>
             <div className='w-full border h-fit mb-2 text-white bg-gray-600 p-4'>
-            <p>Class Name :</p>
-            <p>Level :</p>
-            <p>Course Name :</p>
-            <p>Lecturer's Name :</p>
-            <input className='h-[35px] w-full border-2 p-6 bg-white text-white placeholder:text-gray mb-6 mt-3' placeholder='enter unique code' type='text' required/>
+              <form method='POST'>
+            <input 
+            onChange={(e)=>{setIndexNumber(e.target.value)}}
+            className='h-[35px] w-full border-2 p-6 bg-white text-black placeholder:text-gray mb-6 mt-3' placeholder='enter index number' type='text' required/>
+            <input
+             onChange={(e)=>{setUniqueNumber(e.target.value)}}
+            className='h-[35px] w-full border-2 p-6 bg-white text-black placeholder:text-gray mb-6 mt-3' placeholder='enter unique code' type='text' required/>
             <div>
                 <div className="cursor-pointer" onClick={startWebcam}>
                   Start Webcam
@@ -62,10 +96,11 @@ export const Takeattendanceindex = () => {
             <div className='mt-4'>
                 <div className='flex flex-col items-center'>
                     <div className='px-8 py-4 bg-black text-white w-fit rounded-xl cursor-pointer hover:bg-white hover:text-black hover:shadow-lg'>
-                <button><Link to={'/lastpage'}>Validate</Link></button>    
+                <button onClick={submit}>Validate</button>    
                     </div>
                 </div>
             </div>
+              </form>
         </div>    
             </div>
          </div>
