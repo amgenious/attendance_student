@@ -18,10 +18,12 @@ export const SignupScreenindex = () => {
 
         try{
             await axios.post("https://attendance-backend-gsu3.onrender.com/studentsignup",{
-                username,email,password
+                username :username,
+                email:email,
+                password:password
             })
             .then(res =>{
-                if(res.data="notexist"){
+                if(res.data="created"){
                     history('/login')
                 }
                 else if(res.data="exist"){

@@ -6,7 +6,7 @@ import axios from 'axios'
 export const Takeattendanceindex = () => {
   const history = useNavigate()
   const [indexnumber, setIndexNumber] = useState('')
-  const [uniquenumber, setUniqueNumber] = useState('')
+  const [uniquecode, setUniqueNumber] = useState('')
 
 
   async function submit(e) {
@@ -14,7 +14,8 @@ export const Takeattendanceindex = () => {
 
   try {
     const response = await axios.post("https://attendance-backend-gsu3.onrender.com/studentattendance", {
-      indexnumber, uniquenumber
+      indexnumber:indexnumber,
+      uniquecode:uniquecode
     }, {
       headers: {
         'Accept': 'application/json',

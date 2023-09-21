@@ -1,6 +1,7 @@
 import React, {useState, useEffect}  from 'react'
 import axios from 'axios'
 import { Navbar } from '../shared/Navbar'
+import { Link } from 'react-router-dom';
 
 export const JoinClassindex = () => {
 
@@ -42,7 +43,7 @@ const [klass, setKlass] = useState([])
             <div className='mt-4'>
                 <div className='flex flex-col items-center'>
                     <div className='px-8 py-4 bg-black text-white w-fit rounded-xl cursor-pointer hover:bg-white hover:text-black hover:shadow-lg'>
-                <small>Join Class</small>    
+                <Link to={'/home'}><small>Join Class</small> </Link>   
                     </div>
                 </div>
             </div>

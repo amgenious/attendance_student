@@ -18,7 +18,8 @@ export const LoginScreenindex = () => {
 
         try{
             await axios.post("https://attendance-backend-gsu3.onrender.com/studentlogin",{
-               email,password
+               email:email,
+               password:password
             })
             .then(res =>{
                 if(res.data="exist"){
