@@ -7,6 +7,7 @@ export const Takeattendanceindex = () => {
   const history = useNavigate()
   const [indexnumber, setIndexNumber] = useState('')
   const [uniquecode, setUniqueNumber] = useState('')
+  const [results, setResults] = useState([]);
 
 
   async function submit(e) {
@@ -24,7 +25,10 @@ export const Takeattendanceindex = () => {
     });
 
     if (response.data === "created") {
-      history('/lastpage');
+      // 
+      const response1 = await axios.get("https://attendance-backend-gsu3.onrender.com/searchstudent?q="+[indexnumber]);
+        setResults(response1.data)
+
     } else if (response.data === "notcreated") {
       alert('Class not created');
     }
@@ -33,6 +37,9 @@ export const Takeattendanceindex = () => {
   }
 }
 
+function home (){
+  history('/lastpage');
+}
 
 
 
@@ -77,15 +84,15 @@ export const Takeattendanceindex = () => {
          <hr className='mt-2'></hr>
 
          <div className='flex flex-col justify-center items-center mt-3'>
-            <div className='w-[350px]'>
+            <div className='w-[400px]'>
             <div className='w-full border h-fit mb-2 text-white bg-gray-600 p-4'>
               <form method='POST'>
             <input 
             onChange={(e)=>{setIndexNumber(e.target.value)}}
-            className='h-[35px] w-full border-2 p-6 bg-white text-black placeholder:text-gray mb-6 mt-3' placeholder='enter index number' type='text' required/>
+            className='h-[35px] w-full border-2 p-6 bg-white text-black placeholder:text-gray mb-6 mt-3 lowercase' placeholder='enter index number' type='text' required/>
             <input
              onChange={(e)=>{setUniqueNumber(e.target.value)}}
-            className='h-[35px] w-full border-2 p-6 bg-white text-black placeholder:text-gray mb-6 mt-3' placeholder='enter unique code' type='text' required/>
+            className='h-[35px] w-full border-2 p-6 bg-white text-black placeholder:text-gray mb-6 mt-3 lowercase' placeholder='enter unique code' type='text' required/>
             <div>
                 <div className="cursor-pointer" onClick={startWebcam}>
                   Start Webcam
@@ -102,6 +109,33 @@ export const Takeattendanceindex = () => {
                 </div>
             </div>
               </form>
+        <div>
+                {
+                  results.map((result) => (
+                    <>
+          <table className='text-center mt-5 border w-full'>
+            <tr>
+              <th>Name</th>
+              <th>Index Number</th>
+              <th>Picture</th>
+              </tr>
+            
+                <tr>
+                 <td>{result.fullname}</td> 
+                 <td>{result.indexnumber}</td> 
+                 <td>
+                 <img src={`https://drive.google.com/uc?id=${result.picture}`} className='w-[50px] h-[50px]'></img>
+                  </td> 
+                  </tr>
+              
+          </table>
+          <div className='px-8 py-4 bg-black text-white text-center mt-3 w-full rounded-xl cursor-pointer hover:bg-white hover:text-black hover:shadow-lg'>
+                <button onClick={home}>Submit</button>    
+                    </div>
+                </>
+                    ))
+          }
+        </div>
         </div>    
             </div>
          </div>
