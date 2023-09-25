@@ -4,7 +4,7 @@ import { Link,  useNavigate } from 'react-router-dom';
 import axios from 'axios'
 
 export const Takeattendanceindex = () => {
-  const history = useNavigate()
+  const [isLoading, setIsLoading] = useState(true);
   const [indexnumber, setIndexNumber] = useState('')
   const [uniquecode, setUniqueNumber] = useState('')
   const [results, setResults] = useState([]);
@@ -28,6 +28,9 @@ export const Takeattendanceindex = () => {
       // 
       const response1 = await axios.get("https://attendance-backend-gsu3.onrender.com/searchstudent?q="+[indexnumber]);
         setResults(response1.data)
+        setTimeout(() => {
+          setIsLoading(false);
+        }, 2000); 
 
     } else if (response.data === "notcreated") {
       alert('Class not created');
@@ -41,7 +44,7 @@ export const Takeattendanceindex = () => {
 
 
 
-    const videoRef = useRef(null);
+  const videoRef = useRef(null);
   const canvasRef = useRef(null);
 
   const startWebcam = async () => {
@@ -109,6 +112,9 @@ export const Takeattendanceindex = () => {
               </form>
         <div>
                 {
+                 isLoading ? (
+                  <p><b>Validating ...</b></p>
+                ) : 
                   results.map((result) => (
                     <>
           <table className='text-center mt-5 border w-full'>

@@ -52,9 +52,11 @@ export const UpdateProfileindex = () => {
         .then((res) => res.json())
         .then((a) => {
           setData(a);
-          console.log(a);
         })
         .catch((e) => console.log(e));
+        setTimeout(() => {
+          setIsLoading(false);
+        }, 2000); 
     };
   }
 

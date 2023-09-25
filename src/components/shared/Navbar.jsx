@@ -13,7 +13,7 @@ export const Navbar = () => {
         <ol className='flex'>
             <li className='mr-2'><Link to="/updateprofile">Update Profile</Link></li>
             <li className='mr-2'><Link to="/home">Home</Link></li>
-            <li><a href="#">Logout</a></li>
+            <li><Link to={"/"}>Logout</Link></li>
         </ol>
     </div>
         </div>
