@@ -37,9 +37,7 @@ export const Takeattendanceindex = () => {
   }
 }
 
-function home (){
-  history('/lastpage');
-}
+
 
 
 
@@ -130,7 +128,7 @@ function home (){
               
           </table>
           <div className='px-8 py-4 bg-black text-white text-center mt-3 w-full rounded-xl cursor-pointer hover:bg-white hover:text-black hover:shadow-lg'>
-                <button onClick={home}>Submit</button>    
+               <Link to={"/lastpage"}><button>Submit</button> </Link>     
                     </div>
                 </>
                     ))

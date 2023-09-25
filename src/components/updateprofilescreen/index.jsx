@@ -4,6 +4,7 @@ import axios from "axios"
 import { Link, useNavigate } from "react-router-dom";
 
 export const UpdateProfileindex = () => {
+  const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState([]);
   const history = useNavigate()
   const [indexnumber, setIndexNumber] = useState('')
@@ -85,7 +86,15 @@ export const UpdateProfileindex = () => {
               </div>
               <div>
                 <p>Copy the id below</p>
-                <p>{JSON.stringify(data.id)}</p>
+
+                <p>
+                  {
+                    isLoading ? (
+                      <p><b>Generating image id ...</b></p>
+                    ) :
+                  JSON.stringify(data.id)
+                  }
+                  </p>
               </div>
             </div>
 
