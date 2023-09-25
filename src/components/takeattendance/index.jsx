@@ -133,7 +133,7 @@ export const Takeattendanceindex = () => {
                   </tr>
               
           </table>
-          <div className='px-8 py-4 bg-black text-white text-center mt-3 w-full rounded-xl cursor-pointer hover:bg-white hover:text-black hover:shadow-lg'>
+          <div className='px-8 py-4 bg-black text-white text-center mt-3 flex justify-center items-center rounded-xl cursor-pointer hover:bg-white hover:text-black hover:shadow-lg'>
                <Link to={"/lastpage"}><button>Submit</button> </Link>     
                     </div>
                 </>
