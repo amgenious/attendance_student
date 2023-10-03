@@ -27,10 +27,8 @@ export const Takeattendanceindex = () => {
     if (response.data === "created") {
       // 
       const response1 = await axios.get("https://attendance-backend-gsu3.onrender.com/searchstudent?q="+[indexnumber]);
-        setResults(response1.data)
-        setTimeout(() => {
-          setIsLoading(false);
-        }, 2000); 
+        setResults(response1.data) 
+        console.log(response1.data)
 
     } else if (response.data === "notcreated") {
       alert('Class not created');
@@ -90,10 +88,10 @@ export const Takeattendanceindex = () => {
               <form method='POST'>
             <input 
             onChange={(e)=>{setIndexNumber(e.target.value)}}
-            className='h-[35px] w-full border-2 p-6 bg-white text-black placeholder:text-gray mb-6 mt-3 lowercase' placeholder='enter index number' type='text' required/>
+            className='h-[35px] w-full border-2 p-6 bg-white text-black placeholder:text-gray mb-6 mt-3' placeholder='enter index number' type='text' required/>
             <input
              onChange={(e)=>{setUniqueNumber(e.target.value)}}
-            className='h-[35px] w-full border-2 p-6 bg-white text-black placeholder:text-gray mb-6 mt-3 lowercase' placeholder='enter unique code' type='text' required/>
+            className='h-[35px] w-full border-2 p-6 bg-white text-black placeholder:text-gray mb-6 mt-3 ' placeholder='enter unique code' type='text' required/>
             <div>
                 <div className="cursor-pointer" onClick={startWebcam}>
                   Start Webcam
@@ -112,9 +110,7 @@ export const Takeattendanceindex = () => {
               </form>
         <div>
                 {
-                 isLoading ? (
-                  <p><b>Validating ...</b></p>
-                ) : 
+                  
                   results.map((result) => (
                     <>
           <table className='text-center mt-5 border w-full'>
@@ -133,12 +129,12 @@ export const Takeattendanceindex = () => {
                   </tr>
               
           </table>
-          <div className='px-8 py-4 bg-black text-white text-center mt-3 flex justify-center items-center rounded-xl cursor-pointer hover:bg-white hover:text-black hover:shadow-lg'>
-               <Link to={"/lastpage"}><button>Submit</button> </Link>     
-                    </div>
                 </>
                     ))
           }
+          <div className='px-8 py-4 bg-black text-white text-center mt-3 flex justify-center items-center rounded-xl cursor-pointer hover:bg-white hover:text-black hover:shadow-lg'>
+               <Link to={"/lastpage"}><button>Submit</button> </Link>     
+                    </div>
         </div>
         </div>    
             </div>
